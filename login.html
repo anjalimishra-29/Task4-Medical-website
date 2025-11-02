@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+ <style>
+    body{
+        /* background-color: rgb(155, 245, 147); */
+        background-image: url(Nurse.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h1{
+        text-align: center;
+        color: rgb(12, 19, 1);
+    }
+   .login{
+    /* height: 400px; */
+    width: 100vh;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    box-shadow: wheat;
+    color:black;
+    background-color:whitesmoke;
+    text-align: center;
+   }
+  #submit {
+    background-color: #2667ac;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: max-content;
+    padding: 10px;
+    margin: 8px 0;
+    }
+
+    button:hover {
+      background: dodgerblue;
+    }
+
+    @media  (max-width:444px){
+        .login{
+          background-color: whitesmoke;
+        }
+    }
+        </style>  
+         
+</head>
+<body>
+    <form action="/index.html">
+     <div class="login">
+        <h1>Welcome To MEDI-Life</h1>
+    <div class="box">
+        <label> Email: </label>
+        <input type="email" name="email" class="email" required>
+    </br>
+    </br>
+        <label>Password: </label>
+        <input type="password" name="password" class="password" required>
+    </div></br>
+      
+    <div class="submit">
+        <button type="submit">LOGIN</button>
+    </div>
+    </br>
+    <button type="onclick" id="button">Sign in with Google</button>
+
+        <p><a href="a">Forget password</a></p>
+        <!-- </br> -->
+        <p>Don't have an account? <a href="a"> Register</a></p>
+    
+    </div> 
+    </form>
+
+    <script>
+        function validateLogin(){
+            let email=document.querySelector('input[name="email"]').value;
+            let pass=document.querySelector('input[name="password"]').value;
+            if (email===""|| pass===""){
+                alert("please fill all fields!");
+                return false;
+            }
+        }
+    </script>  
+</body>
+</html>

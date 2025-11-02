@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MEDI-Life portal</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <header class="container">
+    <div class="logo">
+      <div class="mark">ML</div>
+      <div>
+        <strong>MEDI-Life</strong><br />
+        <span class="small muted">Compassionate care • Modern facilities</span>
+      </div>
+    </div>
+    <nav class="muted small" aria-label="Main navigation">
+    <input type="search" placeholder="search here" >
+    <a href="#services">Services</a> · <a href="#book">Book</a> · <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+    <section class="hero">
+      <div class="hero-card" aria-labelledby="hero-title">
+        <h1 id="hero-title">Quality care for your family — <span style="color:var(--accent)">book an appointment</span></h1>
+        <p class="lead">Experienced general practitioners, pediatric care, and teleconsultations. Walk-ins welcome; online booking recommended.</p>
+
+        <ul class="features" aria-hidden="false">
+          <li>General Medicine</li>
+          <li>Pediatrics</li>
+          <li>Teleconsultation</li>
+          <li>Vaccination</li>
+        </ul>
+
+        <h3 style="margin-top:1rem">Hours</h3>
+        <p class="muted small">Mon–Sat: 9:00 AM – 6:00 PM • Emergency line available 24/7</p>
+
+        <section id="services" style="margin-top:1.1rem">
+          <h3 class="small">What we offer</h3>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:.6rem">
+            <div style="background:#fbfdff;padding:.7rem;border-radius:10px">Consultation + Prescription</div>
+            <div style="background:#fbfdff;padding:.7rem;border-radius:10px">Child Immunization</div>
+            <div style="background:#fbfdff;padding:.7rem;border-radius:10px">Chronic Care Reviews</div>
+            <div style="background:#fbfdff;padding:.7rem;border-radius:10px">Home Sample Collection</div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="hero-card" id="book" aria-labelledby="book-title">
+        <h2 id="book-title" style="margin:0 0 .25rem">Book an appointment</h2>
+        <p class="muted small">Fill details and choose a preferred time.</p>
+
+        <form id="appointmentForm" novalidate>
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="e.g., Priya Sharma" required />
+
+          <div class="grid-2">
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="+91 9XXXXXXXXX" pattern="[\d\+\-\s]{7,20}" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" />
+            </div>
+          </div>
+
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="">— choose —</option>
+            <option>General Medicine</option>
+            <option>Pediatrics</option>
+            <option>Womens Health</option>
+            <option>Teleconsultation</option>
+          </select>
+
+          <label for="date">Preferred date</label>
+          <input id="date" name="date" type="date" required />
+
+          <label for="time">Preferred time</label>
+          <select id="time" name="time" required>
+            <option value="">— choose —</option>
+            <option>09:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>03:00 PM</option>
+            <option>04:00 PM</option>
+            <option>05:00 PM</option>
+          </select>
+
+  <div class="todo-container">
+    <p>Symptoms</p>
+    <input type="text" id="taskInput" placeholder="Symptoms like vomiting">
+    <button type="button" onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <span onclick="toggleDone(this)">${taskText}</span>
+        <button onclick="removeTask(this)">X</button>
+      `;
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+    }
+
+    function toggleDone(task) {
+      task.parentElement.classList.toggle("done");
+    }
+
+    function removeTask(button) {
+      button.parentElement.remove();
+    }
+  </script>
+          
+    <label for="note">Additional notes (optional)</label>
+      <textarea id="note" name="note" rows="3" placeholder="Short note (symptoms, preference)"></textarea>
+        <div style="margin-top:.8rem;display:flex;gap:.6rem;align-items:center">
+          <button type="submit" class="btn">Confirm booking</button>
+          <button type="button" id="clearBtn" class="small muted" style="background:transparent;border:0;cursor:pointer">Clear</button>
+          </div>
+          <p id="formError" class="muted small" style="display:none;margin-top:.6rem;color:#8b0000"></p>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;color:black;gap:1rem;padding: 0 5rem;">
+        <div>
+          <strong>MEDI-Life</strong><br/>
+          <span class="muted small">medilifeforyou@yahoo.com • Tel: +91 98765 43210</span>
+        </div>
+        <div class="muted small">© <span id="year"></span> MEDI-Life</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('appointmentForm');
+    const toast = document.getElementById('toast');
+    const formError = document.getElementById('formError');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(()=> toast.style.display = 'none', 4200);
+    }
+
+    clearBtn.addEventListener('click', () => {
+      form.reset();
+      formError.style.display = 'none';
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formError.style.display = 'none';
+
+    
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const dept = form.department.value;
+      const date = form.date.value;
+      const time = form.time.value;
+
+      if(!name || !phone || !dept || !date || !time){
+        formError.textContent = 'Please complete required fields.';
+        formError.style.display = 'block';
+        return;
+      }
+
+      
+      const bookings = JSON.parse(localStorage.getItem('clinicBookings') || '[]');
+      const booking = {
+        id: 'bk_' + Date.now(),
+        name, phone, dept, date, time, note: form.note.value.trim()
+      };
+      bookings.push(booking);
+      localStorage.setItem('clinicBookings', JSON.stringify(bookings));
+
+      showToast('Appointment saved — reference: ' + booking.id);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
